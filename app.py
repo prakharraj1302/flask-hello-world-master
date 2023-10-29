@@ -19,27 +19,16 @@ def get_leetcode_profile():
     # Extract username from the request's JSON body
     data = request.json
     username = data.get("username")
+    query = data.get("query")
+    variable = data.get("vars")
 
     if not username:
         return jsonify({"error": "Username is required"}), 400
 
     # GraphQL query and variables
     graphql_query = {
-        "query": """
-        query getUserProfile($username: String!) {
-            allQuestionsCount { difficulty count }
-            matchedUser(username: $username) {
-                contributions { points }
-                profile { reputation ranking }
-                submissionCalendar
-                submitStats {
-                    acSubmissionNum { difficulty count submissions }
-                    totalSubmissionNum { difficulty count submissions }
-                }
-            }
-        }
-        """,
-        "variables": {"username": username}
+        "query":query,
+        "variables": variable
     }
 
     # Headers for the POST request to LeetCode
