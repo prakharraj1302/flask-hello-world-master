@@ -42,6 +42,11 @@ def get_leetcode_profile():
 
     # Making the POST request to LeetCode
     response = requests.post(url, json=graphql_query, headers=headers)
+    print(response.status_code)
+    
 
     # Return the response from LeetCode
     return jsonify(response.json())
+
+
+
